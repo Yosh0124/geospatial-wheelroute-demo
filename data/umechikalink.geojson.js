@@ -1,4 +1,4 @@
-{
+var link = {
     "type": "FeatureCollection",
     "name": "umechika_link",
     "features": [

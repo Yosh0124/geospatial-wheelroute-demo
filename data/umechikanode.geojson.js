@@ -1,4 +1,4 @@
-{
+var node = {
     "type": "FeatureCollection",
     "name": "umechika_node",
     "features": [
