@@ -81,6 +81,17 @@ for( var i=0; i<link.features.length; i++ ) {
       break;
   }
 
+  if( link.features[i].properties.elevator > 1 && link.features[i].properties.elevator < 6 ) {
+    var icon = L.icon({
+      iconUrl: './images/elevator.png',
+      iconRetinaUrl: './images/elevator.png',
+      iconSize: [20, 20],
+      iconAnchor: [0, 0],
+      popupAnchor: [0, -20],
+    });
+    mapMarker = L.marker([(link.features[i].geometry.coordinates[0][1] + link.features[i].geometry.coordinates[1][1])/2, (link.features[i].geometry.coordinates[0][0]+link.features[i].geometry.coordinates[1][0])/2], { icon: icon }).addTo(map);
+  }
+
   lines[i]["link_id"] = link.features[i].properties.link_id
 
   lines[i].on('click', function(){
