@@ -10,25 +10,21 @@ L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
 }).addTo(map);
 
 // Draw lines
+var lines = Array(i<link.features.length);
 for( var i=0; i<link.features.length; i++ ) {
   switch(link.features[i].properties.link_id) {
     case "379bfccb-4662-48af-9714-97a4e5ad8c61":
-    case "":
-    case "":
-    case "":
-    case "":
-    case "":
-    case "":
-      var Line = L.polyline([
+      lines[i] = L.polyline([
         [link.features[i].geometry.coordinates[0][1],link.features[i].geometry.coordinates[0][0]],
         [link.features[i].geometry.coordinates[1][1],link.features[i].geometry.coordinates[1][0]],
       ],{
         "color": color_unavailable_line,
         "weight": 1
       }).addTo(map);
+      L.marker([link.features[i].geometry.coordinates[0][1],link.features[i].geometry.coordinates[0][0]]).addTo(map);
       break;
     default:
-      var Line = L.polyline([
+      lines[i] = L.polyline([
         [link.features[i].geometry.coordinates[0][1],link.features[i].geometry.coordinates[0][0]],
         [link.features[i].geometry.coordinates[1][1],link.features[i].geometry.coordinates[1][0]],
       ],{
@@ -37,4 +33,12 @@ for( var i=0; i<link.features.length; i++ ) {
       }).addTo(map);
       break;
   }
+  lines[i].on('click', function(){
+    alert("link_id=" + link.features[i].properties.link_id);
+  });
 }
+
+// Insert markers here.
+
+
+// Insert lines here.
