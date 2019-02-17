@@ -1,4 +1,4 @@
-const color_available_line = "#81daf5";
+const color_available_line = "#ffff00";
 const color_unavailable_line = "#909090";
 const color_selected_line = "#ff0000";
 const color_selected_line_underground = "#00ff00";
