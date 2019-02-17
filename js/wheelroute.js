@@ -19,6 +19,7 @@ for( var i=0; i<link.features.length; i++ ) {
     case "68df9bdf-cb69-4f11-88a3-84b3ba4e4639":
     case "763061c4-38c2-4467-99a2-cbcde4a6ff56":
     case "0f0c8d59-a26b-4730-94e7-f35cdb5ab214":
+    case "5555fcef-7571-4539-98f2-23dd9902dfbe":
 
 
    
@@ -29,7 +30,7 @@ for( var i=0; i<link.features.length; i++ ) {
         "color": color_unavailable_line,
         "weight": 1
       }).addTo(map);
-      L.marker([link.features[i].geometry.coordinates[0][1],link.features[i].geometry.coordinates[0][0]]).addTo(map);
+     // L.marker([link.features[i].geometry.coordinates[0][1],link.features[i].geometry.coordinates[0][0]]).addTo(map);
       break;
     default:
       lines[i] = L.polyline([
@@ -41,13 +42,16 @@ for( var i=0; i<link.features.length; i++ ) {
       }).addTo(map);
       break;
   }
+
+  lines[i]["link_id"] = link.features[i].properties.link_id;
+
   lines[i].on('click', function(){
-    alert("link_id=" + link.features[i].properties.link_id);
+    console.log(this);
   });
 }
 
 // Insert markers here.
-marker([34.700173 ,135.496104]).addTo(map);
+L.marker([34.700173 ,135.496104]).addTo(map);
 
 // Insert lines here.
-marker([34.704431 ,135.496943]).addTo(map);
+L.marker([34.704431 ,135.496943]).addTo(map);
