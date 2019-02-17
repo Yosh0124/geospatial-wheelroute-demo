@@ -1,6 +1,7 @@
 const color_available_line = "#81daf5";
 const color_unavailable_line = "#909090";
-const color_selected_line = "#ff0000"
+const color_selected_line = "#ff0000";
+const color_selected_line_underground = "#00ff00";
 
 // Set map view
 var map = L.map('map').setView([34.6992,135.4968], 16);
@@ -38,7 +39,33 @@ for( var i=0; i<link.features.length; i++ ) {
         [link.features[i].geometry.coordinates[0][1],link.features[i].geometry.coordinates[0][0]],
         [link.features[i].geometry.coordinates[1][1],link.features[i].geometry.coordinates[1][0]],
       ],{
+        "color": color_selected_line_underground,
+        "weight": 3,
+        "z-index": 400,
+      }).addTo(map);
+      break;
+    case "9fa56fae-d4d0-42f5-a855-f123d82e2b08":
+    case "11fa69e6-c69e-44ff-9362-c56f7159064e":
+    case "00b8af69-3ecd-4c9d-ac0f-034519795c82":
+    case "57e71460-0072-4725-a9bb-a2fa51c2fd40":
+      lines[i] = L.polyline([
+        [link.features[i].geometry.coordinates[0][1],link.features[i].geometry.coordinates[0][0]],
+        [link.features[i].geometry.coordinates[1][1],link.features[i].geometry.coordinates[1][0]],
+      ],{
         "color": color_selected_line,
+        "weight": 3,
+        "z-index": 400,
+      }).addTo(map);
+      break;
+    case "28eae946-be74-487b-92ab-24274c18d8d5":
+    case "5bc81de1-f775-4031-9ecd-dfb695cd23c8":
+    case "ebd9f5ee-56fe-41b0-8c1d-2c94c0e5e6e9":
+    case "2b07961d-bb5f-4675-ad2a-86533919a4d5":
+      lines[i] = L.polyline([
+        [link.features[i].geometry.coordinates[0][1],link.features[i].geometry.coordinates[0][0]],
+        [link.features[i].geometry.coordinates[1][1],link.features[i].geometry.coordinates[1][0]],
+      ],{
+        "color": color_unavailable_line,
         "weight": 3,
         "z-index": 400,
       }).addTo(map);
