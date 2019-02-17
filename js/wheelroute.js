@@ -1,6 +1,5 @@
 const color_available_line = "#FF0000";
 const color_unavailable_line = "#0000FF";
-const color_other_line = "#00FF00";
 
 // Set map view
 var map = L.map('map').setView([34.6992,135.4968], 16);
@@ -13,65 +12,42 @@ L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
 // Draw lines
 var lines = Array(i<link.features.length);
 for( var i=0; i<link.features.length; i++ ) {
+  switch(link.features[i].properties.link_id) {
+    case "379bfccb-4662-48af-9714-97a4e5ad8c61":
+    case "9b7bbcbc-b1c5-4136-9ac3-e79e9829a371":
+    case "5a0ab57c-018d-49fe-ac95-c77761ce6a51":
+    case "68df9bdf-cb69-4f11-88a3-84b3ba4e4639":
+    case "763061c4-38c2-4467-99a2-cbcde4a6ff56":
+    case "0f0c8d59-a26b-4730-94e7-f35cdb5ab214":
 
-  var start_id = link.features[i].properties.start_id;
-  var end_id = link.features[i].properties.end_id;
 
-  var is_underground = false;
-  for( var j=0; j<node.features.length; j++ ) {
-    if( node.features[j].properties.node_id == start_id || node.features[j].properties.node_id == end_id ){
-      if( node.features[j].properties.floor < 0 && node.features[j].properties.in_out == 3) {
-        is_underground = true
-        break
-      }
-    }
+   
+      lines[i] = L.polyline([
+        [link.features[i].geometry.coordinates[0][1],link.features[i].geometry.coordinates[0][0]],
+        [link.features[i].geometry.coordinates[1][1],link.features[i].geometry.coordinates[1][0]],
+      ],{
+        "color": color_unavailable_line,
+        "weight": 1
+      }).addTo(map);
+      L.marker([link.features[i].geometry.coordinates[0][1],link.features[i].geometry.coordinates[0][0]]).addTo(map);
+      break;
+    default:
+      lines[i] = L.polyline([
+        [link.features[i].geometry.coordinates[0][1],link.features[i].geometry.coordinates[0][0]],
+        [link.features[i].geometry.coordinates[1][1],link.features[i].geometry.coordinates[1][0]],
+      ],{
+        "color": color_available_line,
+        "weight": 1
+      }).addTo(map);
+      break;
   }
-
-  if( is_underground ) {
-    switch(link.features[i].properties.link_id) {
-      case "e95d91d2-5dd4-41c4-8b61-3ed53d8c5c63":
-        lines[i] = L.polyline([
-          [link.features[i].geometry.coordinates[0][1],link.features[i].geometry.coordinates[0][0]],
-          [link.features[i].geometry.coordinates[1][1],link.features[i].geometry.coordinates[1][0]],
-        ],{
-          "color": color_unavailable_line,
-          "weight": 1
-        }).addTo(map);
-        L.marker([link.features[i].geometry.coordinates[0][1],link.features[i].geometry.coordinates[0][0]]).addTo(map);
-        break;
-      default:
-        lines[i] = L.polyline([
-          [link.features[i].geometry.coordinates[0][1],link.features[i].geometry.coordinates[0][0]],
-          [link.features[i].geometry.coordinates[1][1],link.features[i].geometry.coordinates[1][0]],
-        ],{
-          "color": color_available_line,
-          "weight": 1
-        }).addTo(map);
-        break;
-    }
-
-    lines[i]["link_id"] = link.features[i].properties.link_id
-
-    lines[i].on("click", function(){
-      console.log(this);
-    });
-  }
+  lines[i].on('click', function(){
+    alert("link_id=" + link.features[i].properties.link_id);
+  });
 }
 
 // Insert markers here.
-L.marker([34.700173 ,135.496104]).addTo(map);
+marker([34.700173 ,135.496104]).addTo(map);
 
 // Insert lines here.
-L.marker([34.704431 ,135.496943]).addTo(map);
-
-// Auto routing.
-// L.Routing.control({
-//   waypoints: [
-//     L.latLng(34.700173 ,135.496104),
-//     L.latLng(34.704431 ,135.496943)
-//   ],
-//   router: new L.Routing.OSRMv1({
-//     profile: "foot"
-//   })
-// }).addTo(map);
-
+marker([34.704431 ,135.496943]).addTo(map);
