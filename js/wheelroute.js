@@ -39,6 +39,7 @@ for( var i=0; i<link.features.length; i++ ) {
 }
 
 // Insert markers here.
-
+marker([link.features[34.700173 ,135.496104].geometry.coordinates[0][1],link.features[i].geometry.coordinates[0][0]]).addTo(map);
 
 // Insert lines here.
+marker([link.features[34.704431 ,135.496943].geometry.coordinates[0][1],link.features[i].geometry.coordinates[0][0]]).addTo(map);
