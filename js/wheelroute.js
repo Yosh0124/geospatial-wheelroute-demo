@@ -28,30 +28,33 @@ for( var i=0; i<link.features.length; i++ ) {
   }
 
   if( is_underground ) {
+    switch(link.features[i].properties.link_id) {
+      case "e95d91d2-5dd4-41c4-8b61-3ed53d8c5c63":
+        lines[i] = L.polyline([
+          [link.features[i].geometry.coordinates[0][1],link.features[i].geometry.coordinates[0][0]],
+          [link.features[i].geometry.coordinates[1][1],link.features[i].geometry.coordinates[1][0]],
+        ],{
+          "color": color_unavailable_line,
+          "weight": 1
+        }).addTo(map);
+        L.marker([link.features[i].geometry.coordinates[0][1],link.features[i].geometry.coordinates[0][0]]).addTo(map);
+        break;
+      default:
+        lines[i] = L.polyline([
+          [link.features[i].geometry.coordinates[0][1],link.features[i].geometry.coordinates[0][0]],
+          [link.features[i].geometry.coordinates[1][1],link.features[i].geometry.coordinates[1][0]],
+        ],{
+          "color": color_available_line,
+          "weight": 1
+        }).addTo(map);
+        break;
+    }
 
+    lines[i]["link_id"] = link.features[i].properties.link_id
 
-
-    // switch(link.features[i].properties.link_id) {
-      // case "379bfccb-4662-48af-9714-97a4e5ad8c61":
-      //   lines[i] = L.polyline([
-      //     [link.features[i].geometry.coordinates[0][1],link.features[i].geometry.coordinates[0][0]],
-      //     [link.features[i].geometry.coordinates[1][1],link.features[i].geometry.coordinates[1][0]],
-      //   ],{
-      //     "color": color_unavailable_line,
-      //     "weight": 1
-      //   }).addTo(map);
-      //   L.marker([link.features[i].geometry.coordinates[0][1],link.features[i].geometry.coordinates[0][0]]).addTo(map);
-      //   break;
-      // default:
-      //   lines[i] = L.polyline([
-      //     [link.features[i].geometry.coordinates[0][1],link.features[i].geometry.coordinates[0][0]],
-      //     [link.features[i].geometry.coordinates[1][1],link.features[i].geometry.coordinates[1][0]],
-      //   ],{
-      //     "color": color_available_line,
-      //     "weight": 1
-      //   }).addTo(map);
-      //   break;
-    // }
+    lines[i].on("click", function(){
+      console.log(this);
+    });
   }
 }
 
@@ -61,13 +64,14 @@ L.marker([34.700173 ,135.496104]).addTo(map);
 // Insert lines here.
 L.marker([34.704431 ,135.496943]).addTo(map);
 
-L.Routing.control({
-  waypoints: [
-    L.latLng(34.700173 ,135.496104),
-    L.latLng(34.704431 ,135.496943)
-  ],
-  router: new L.Routing.OSRMv1({
-    profile: "foot"
-  })
-}).addTo(map);
+// Auto routing.
+// L.Routing.control({
+//   waypoints: [
+//     L.latLng(34.700173 ,135.496104),
+//     L.latLng(34.704431 ,135.496943)
+//   ],
+//   router: new L.Routing.OSRMv1({
+//     profile: "foot"
+//   })
+// }).addTo(map);
 
