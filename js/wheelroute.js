@@ -1,5 +1,5 @@
 const color_available_line = "#81daf5";
-const color_unavailable_line = "#ffff00";
+const color_unavailable_line = "#000000";
 const color_selected_line = "#ff0000";
 const color_selected_line_underground = "#00ff00";
 
@@ -40,7 +40,7 @@ for( var i=0; i<link.features.length; i++ ) {
         [link.features[i].geometry.coordinates[1][1],link.features[i].geometry.coordinates[1][0]],
       ],{
         "color": color_selected_line_underground,
-        "weight": 3,
+        "weight": 6,
         "z-index": 400,
       }).addTo(map);
       break;
@@ -53,7 +53,7 @@ for( var i=0; i<link.features.length; i++ ) {
         [link.features[i].geometry.coordinates[1][1],link.features[i].geometry.coordinates[1][0]],
       ],{
         "color": color_selected_line,
-        "weight": 3,
+        "weight": 6,
         "z-index": 400,
       }).addTo(map);
       break;
@@ -66,7 +66,7 @@ for( var i=0; i<link.features.length; i++ ) {
         [link.features[i].geometry.coordinates[1][1],link.features[i].geometry.coordinates[1][0]],
       ],{
         "color": color_unavailable_line,
-        "weight": 3,
+        "weight": 6,
         "z-index": 400,
       }).addTo(map);
       break;
